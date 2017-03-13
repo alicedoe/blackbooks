@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="panel-primary">
+    <div class="panel-heading text-center col-lg-offset-3 col-lg-6 col-lg-offset-3"> <h3 class="panel-title">Création d'une catégorie</h3> </div> 
+</div>
+
+<div class="input-group  text-center col-lg-offset-3 col-lg-6 col-lg-offset-3">
+    {{ form_start(form) }}
+    <div class="input-group">
+  <span class="input-group-addon">Titre de la catégorie</span>
+  {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+<a href="{{ path('admincategories_index') }}" class="btn btn-warning" role="button">Retour</a>
+        <input type="submit" class="btn btn-success" role="button" value="Ajouter une catégorie" />
+        {{ form_end(form) }}
+</div>
+</div>
+{% endblock %}

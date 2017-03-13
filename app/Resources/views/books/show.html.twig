@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center col-lg-offset-3 col-lg-6 col-lg-offset-3">Détails du livre</h1>
+
+
+    <div class="panel panel-default text-center col-lg-offset-3 col-lg-6 col-lg-offset-3">
+        <div class="panel-heading">Id</div>
+        <div class="panel-body">
+            {{ book.id }}
+        </div>
+        <div class="panel-heading">Titre</div>
+        <div class="panel-body">
+            {{ book.titre }}
+        </div>
+        <div class="panel-heading">Auteur</div>
+        <div class="panel-body">
+            {{ book.auteur }}
+        </div>
+        <div class="panel-heading">Catégorie</div>
+        <div class="panel-body">
+            {{ book.categorie.nom }}
+        </div>
+    
+
+<div class="row">
+  <div class="col-lg-4">
+        <a href="{{ path('adminbooks_index') }}" class="btn btn-primary text-center" role="button">Retour à la liste</a>
+  </div> 
+  
+   <div class="col-lg-4">
+        {{ form_start(delete_form) }}
+        <input type="submit" class="btn btn-danger text-center" role="button" value="Supprimer">
+        {{ form_end(delete_form) }}
+   </div> 
+   <div class="col-lg-4">
+         <a href="{{ path('adminbooks_edit', { 'id': book.id }) }}" class="btn btn-warning text-center" role="button">Editer</a>
+    </div></div></div>
+{% endblock %}

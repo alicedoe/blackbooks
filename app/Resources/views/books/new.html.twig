@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="panel-primary">
+    <div class="panel-heading text-center col-lg-offset-3 col-lg-6 col-lg-offset-3"> <h3 class="panel-title">Ajout d'un livre</h3> </div> 
+</div>
+
+<div class="input-group  text-center col-lg-offset-3 col-lg-6 col-lg-offset-3">
+    {{ form_start(form) }}
+    <div class="input-group">
+  <span class="input-group-addon">Titre du livre</span>
+  {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+<div class="input-group">    
+<span class="input-group-addon">Auteur du livre</span>
+  {{ form_widget(form.auteur, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon">Catégorie du livre</span>
+  {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<a href="{{ path('adminbooks_index') }}" class="btn btn-warning" role="button">Retour</a>
+        <input type="submit" class="btn btn-success" role="button" value="Ajouter un livre" />
+        {{ form_end(form) }}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}LibraryBundle:Controller:cat{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Controller:cat page</h1>
+
+<table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td><a href="{{ path('detailbooks', { 'id': book.id }) }}">{{ book.id }}</a></td>
+                <td>{{ book.titre }}</td>
+                <td>{{ book.auteur }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('detailbooks', { 'id': book.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="panel panel-primary text-center">
+    <div class="panel-heading"> <h3 class="panel-title">liste des catégories</h3> </div> 
+</div>
+    <table class="text-center col-lg-offset-3 col-lg-6 col-lg-offset-3">
+        <thead>
+            <tr >
+                <th class="text-center">Id</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.nom }}</td>
+                <td>
+                    <a href="{{ path('admincategories_edit', { 'id': category.id }) }}" class="btn btn-warning" role="button">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2"  class="text-center"><a href="{{ path('admincategories_new') }}" class="btn btn-success text-center" role="button">Créer une nouvelle catégorie</a></td>
+            <td  colspan="1" class="text-center"><a href="{{ path('adminbooks_index') }}" class="btn btn-primary text-center" role="button">Voir les livres</a></td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

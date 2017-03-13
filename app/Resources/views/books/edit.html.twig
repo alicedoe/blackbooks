@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="panel-primary">
+    <div class="panel-heading text-center col-lg-offset-3 col-lg-6 col-lg-offset-3"> <h3 class="panel-title">Editer le livre</h3> </div> 
+</div>
+
+<div class="input-group  text-center col-lg-offset-3 col-lg-6 col-lg-offset-3">
+    {{ form_start(edit_form) }}
+    <div class="input-group">
+  <span class="input-group-addon">Titre du livre</span>
+  {{ form_widget(edit_form.titre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+<div class="input-group">    
+<span class="input-group-addon">Auteur du livre</span>
+  {{ form_widget(edit_form.auteur, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon">Catégorie du livre</span>
+  {{ form_widget(edit_form.categorie, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+
+<a href="{{ path('adminbooks_index') }}" class="btn btn-success" role="button">Retour</a></div>
+    <div class="col-lg-6">     <input type="submit" class="btn btn-danger" role="button" value="Valider"></div>
+        {{ form_end(edit_form) }}
+</div></div>
+</div>
+{% endblock %}
