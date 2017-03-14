@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="books")
  * @ORM\Entity(repositoryClass="LibraryBundle\Repository\BooksRepository")
  */
-class Books
+class Books implements \JsonSerializable
 {
     /**
      * @var int
@@ -123,5 +123,15 @@ class Books
     {
         return $this->categorie;
     }
+
+    public function jsonSerialize() {
+        return array(
+            'id' => $this->getId(),
+            'titre' => $this->getTitre(),
+            'auteur' => $this->getAuteur(),
+            'cat' => $this->getCategorie()->getNom(),
+        );
+    }
+
 }
 

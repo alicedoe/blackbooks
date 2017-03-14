@@ -2,66 +2,54 @@
 
 namespace LibraryBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use LibraryBundle\Entity\Books;
 use LibraryBundle\Entity\Categories;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ConsultingController extends Controller
-{
+class ConsultingController extends Controller {
+
     /**
      * @Route("/books", name="listbooks")
      * @Method({"GET"})
      */
-    public function booksAction()
-    {   
+    public function booksAction() {
         $em = $this->getDoctrine()->getManager();
-
         $books = $em->getRepository('LibraryBundle:Books')->findAll();
-
-        $formatted = [];
-        foreach ($books as $book) {
-            $formatted[] = [
-               'id' => $book->getId(),
-               'titre' => $book->getTitre(),
-               'auteur' => $book->getAuteur(),            
-               'cat' => $book->getCategorie()->getNom(),
-            ];
-        }
-
-        return new JsonResponse($formatted);
+        return new JsonResponse($books);
     }
-
+    
     /**
-     * @Route("/cat/{id}", name="listcat")
-     */
-    public function catAction(Categories $cat)
-    {   
-        $em = $this->getDoctrine()->getManager();
-
-        $books = $em->getRepository('LibraryBundle:Books')->findBy( array('categorie' => $cat));
-        
-        return $this->render('LibraryBundle:Controller:cat.html.twig', array(
-            'books' => $books,
-        ));
-    }
-
-    /**
-     * @Route("/book/{id}", name="detailbooks")
+     * @Route("/books/{id}/copies", name="booksidcopies")
      * @Method({"GET"})
      */
-    public function bookAction(Books $book)
-    {
+    public function getCopies($id) {
+        $em = $this->getDoctrine()->getManager();
+        $copies = $em->getRepository(\LibraryBundle\Entity\Copy::class)->findByBook($id);
+        return new JsonResponse($copies);
+    }
+    
+    
+    /**
+     * @Route("/categories/{id}", name="getcatoriesid")
+     * @Method({"GET"})
+     */
+    public function getcatoriesidAction(Categories $cat) {
+        $em = $this->getDoctrine()->getManager();
+        $cat = $em->getRepository('LibraryBundle:Categories')->find($cat);
+        return new JsonResponse($cat->getNom());
+    }
 
-        return new JsonResponse([
-               'id' => $book->getId(),
-               'titre' => $book->getTitre(),
-               'auteur' => $book->getAuteur(),            
-               'cat' => $book->getCategorie()->getNom(),
-            ]);
+    /**
+     * @Route("/books/{id}", name="getbooksid")
+     * @Method({"GET"})
+     */
+    public function getbooksidAction(Books $book) {
+
+        return new JsonResponse($book->getTitre());
+        
     }
 
 }
